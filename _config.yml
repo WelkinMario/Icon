@@ -1,0 +1,22 @@
+baseurl: ""
+url: "https://WelkinMario.github.io"
+
+plugins:
+  - jekyll-sass-converter
+  - jekyll-seo-tag
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+include:
+  - assets
+  
+kramdown:
+  input: Kramdown
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
