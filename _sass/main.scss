@@ -1,0 +1,32 @@
+.input {
+    margin-bottom: 20px;
+}
+
+.output {
+    margin-top: 20px;
+}
+
+#imagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#imagesContainer canvas {
+    border: 1px solid #000;
+}
+
+#imagesContainer a {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #000;
+}

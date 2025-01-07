@@ -1,5 +1,5 @@
 baseurl: ""
-url: "https://WelkinMario.github.io"
+url: "https://WelkinMario.github.io/Icon"
 
 plugins:
   - jekyll-sass-converter
