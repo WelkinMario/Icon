@@ -3,7 +3,19 @@ document.getElementById('iconForm').addEventListener('submit', function(event) {
     const text = event.target.icon.value;
     const font = event.target.font.value;
     showLoadingSpinner();
-    generateImages(text, font);
+    WebFont.load({
+        google: {
+            families: [font]
+        },
+        active: function() {  
+            generateImages(text, font);
+            hideLoadingSpinner();
+        },
+        inactive: function() {
+            alert('Font not loaded');
+            hideLoadingSpinner();
+        }
+    });
 });
 
 function showLoadingSpinner() {
@@ -18,18 +30,7 @@ function generateImages(text, font) {
     const container = document.getElementById('imagesContainer');
     container.innerHTML = ''; // Clear previous images
 
-    // Load the selected font from Google Fonts
-    const link = document.createElement('link');
-    link.href = `https://fonts.googleapis.com/css?family=${font.replace(' ', '+')}&text=${encodeURIComponent(text)}`;
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-
     // Generate images with random borders
-    for (let i = 0; i < 5; i++) {
-        const canvas = document.createElement('canvas');
-        canvas.width = 200;
-        canvas.height = 200;
-        const ctx = canvas.getContext('2d');
         /*
         // Set random rectangle properties
         const rectWidth = Math.random() * 100 + 50; // Random width between 50 and 150
@@ -42,20 +43,43 @@ function generateImages(text, font) {
         ctx.lineWidth = 2;
         ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
         */
-        // Set font and draw text
-        ctx.font = `100px ${font} sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+        // Set font and draw text           
+    for (let i = 0; i < 6; i++) {
+        const ctn = document.createElement('div');
+        const block = document.createElement('div');
+        const back = document.createElement('div');
+        const pic = document.createElement('div');
+        block.className = "block";
+        back.className = "back";
+        pic.className = "pic";
+        block.appendChild(back);
+        block.appendChild(pic);
+        ctn.appendChild(block);
+        container.appendChild(ctn);
 
+        pic.style.fontFamily = font;
+        pic.textContent = text;        
+        adjustFontSize(pic);
+        
         // Add download button
-        const downloadLink = document.createElement('a');
-        downloadLink.href = canvas.toDataURL();
-        downloadLink.download = `icon_${i}.png`;
-        downloadLink.textContent = 'Download';
-        container.appendChild(canvas);
-        container.appendChild(downloadLink);
+        html2canvas(block).then(canvas => {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.download = `icon_${i}.png`;
+            downloadLink.textContent = 'Download';
+
+            ctn.appendChild(downloadLink);
+        });
     }
-    console.log('Images generated');
-    hideLoadingSpinner();
+}
+
+function adjustFontSize(element) {
+    let fontSize = 120; // Start font size
+    element.style.fontSize = `${fontSize}px`;
+
+    while (element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) {
+        fontSize--;
+        element.style.fontSize = `${fontSize}px`;
+        if (fontSize <= 10) break;
+    }
 }

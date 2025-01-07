@@ -12,8 +12,29 @@
     gap: 10px;
 }
 
-#imagesContainer canvas {
-    border: 1px solid #000;
+#imagesContainer .block {
+    // border: 1px solid #000;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#imagesContainer .pic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
 }
 
 #imagesContainer a {
