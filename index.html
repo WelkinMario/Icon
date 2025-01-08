@@ -3,20 +3,27 @@ layout: default
 ---
 
 <div class="input">
-    <p>Design your icon</p>
+    <p class="title">Design your <a class="highlight">ICON</a></p>
+    <p class="comment">Simple, concise, and clean image generator</p>
     <form id="iconForm">
-        <input type="text" name="icon" maxlength="20" placeholder="Enter text (max 20 characters)" required>
-        <select name="font" id="fontSelect">
-            {% for font in site.data.fonts %}
-            <option value="{{ font }}">{{ font }}</option>
-            {% endfor %}
-        </select>
+        <input type="text" id="textInput" name="icon" maxlength="20" placeholder="Enter text (max 20 characters)" required>
+        <div class="fontList">
+            <input type="text" id="searchInput" placeholder="Search fonts..." autocomplete="off">
+            <div id="fontSelectContainer">
+                <select name="font" id="fontSelect" size="10">
+                    {% for font in site.data.fonts %}
+                    <option class="fontItem" value="{{ font }}">{{ font }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
         <button type="submit">Generate</button>
     </form>
+    <p class="comment" id="tip">Not sure which font to use? Take a look at <a href="https://fonts.google.com/">Google Fonts</a></p>
 </div>
 
 <div class="output">
-    <p>result</p>
+    <p></p>
     <div id="imagesContainer"></div>
 </div>
 

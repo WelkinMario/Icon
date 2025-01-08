@@ -1,6 +1,36 @@
+document.getElementById('searchInput').addEventListener('focus', function() {
+    document.getElementById('fontSelectContainer').style.display = 'block';
+});
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    var filter = this.value.toLowerCase();
+    var options = document.getElementById('fontSelect').getElementsByTagName('option');
+    for (var i = 0; i < options.length; i++) {
+        var option = options[i];
+        if (option.textContent.toLowerCase().startsWith(filter)) {
+            option.selected = true;
+            option.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            break;
+        }
+    }
+});
+
+document.getElementById('fontSelect').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    document.getElementById('searchInput').value = selectedOption.textContent;
+    document.getElementById('fontSelectContainer').style.display = 'none';
+});
+
+document.addEventListener('click', function(event) {
+    var isClickInside = document.getElementById('fontSelectContainer').contains(event.target) || document.getElementById('searchInput').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('fontSelectContainer').style.display = 'none';
+    }
+});
+
 document.getElementById('iconForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const text = event.target.icon.value;
+    const text = processInput(event.target.icon.value);
     const font = event.target.font.value;
     showLoadingSpinner();
     WebFont.load({
@@ -17,6 +47,10 @@ document.getElementById('iconForm').addEventListener('submit', function(event) {
         }
     });
 });
+
+function processInput(str) { 
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
 
 function showLoadingSpinner() {
     document.getElementById('loadingSpinner').style.display = 'block';
