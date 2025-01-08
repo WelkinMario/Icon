@@ -3,7 +3,34 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
-    background-color: aquamarine;
+    width: 95%;
+    height: 95%;
+    border: 10px solid #000;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+#back_0 {
+    border-color: white;
+}
+
+#back_1 {
+    border-radius: 5px;
+    // box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#back_2 {
+    border-radius: 10%;
+}
+
+#back_3 {
+    border-radius: 30%;
+}
+
+#back_4 {
+    border-radius: 30% 10%;
+}
+
+#back_5 {
+    border-radius: 50%;
 }

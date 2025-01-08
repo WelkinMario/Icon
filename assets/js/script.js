@@ -29,21 +29,7 @@ function hideLoadingSpinner() {
 function generateImages(text, font) {
     const container = document.getElementById('imagesContainer');
     container.innerHTML = ''; // Clear previous images
-
-    // Generate images with random borders
-        /*
-        // Set random rectangle properties
-        const rectWidth = Math.random() * 100 + 50; // Random width between 50 and 150
-        const rectHeight = Math.random() * 100 + 50; // Random height between 50 and 150
-        const rectX = Math.random() * (200 - rectWidth); // Random x position
-        const rectY = Math.random() * (200 - rectHeight); // Random y position
-
-        // Draw the rectangle
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(rectX, rectY, rectWidth, rectHeight);
-        */
-        // Set font and draw text           
+        
     for (let i = 0; i < 6; i++) {
         const ctn = document.createElement('div');
         const block = document.createElement('div');
@@ -51,6 +37,7 @@ function generateImages(text, font) {
         const pic = document.createElement('div');
         block.className = "block";
         back.className = "back";
+        back.id = `back_${i}`;
         pic.className = "pic";
         block.appendChild(back);
         block.appendChild(pic);
